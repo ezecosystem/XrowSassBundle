@@ -1,0 +1,13 @@
+services:
+    sassCommand:
+        class: Xrow\SassBundle\Command\sassCommand
+        arguments:
+            - @ezpublish.config.resolver
+            - @service_container
+            - %ezpublish.siteaccess.list%
+        tags:
+            -  { name: console.command }
+    SassHandler:
+        class: Xrow\SassBundle\Model\SassHandler
+        arguments: 
+            - @ezpublish.config.resolver
