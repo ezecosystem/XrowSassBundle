@@ -1,0 +1,9 @@
+{
+    "name": "xrow/sass-bundle",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "description": "This bundle provides Sass compilation for multiple eZ Publish siteaccesses",
+    "autoload": {
+        "psr-4": { "Xrow\\SassBundle\\": "" }
+    }
+}
