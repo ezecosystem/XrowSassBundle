@@ -36,8 +36,19 @@ class sassCommand extends ContainerAwareCommand
         $destination = $this->getContainer()->get('kernel')->getRootDir() . "/../web/css/";
         foreach ($this->siteAccessList as $siteaccess)
         {
-            $file = $this->configResolver->getParameter( 'file', 'xrow_sass' , $siteaccess );
-            $settings = $this->configResolver->getParameter( 'settings', 'xrow_sass' , $siteaccess );
+            try
+            {
+                $file = $this->configResolver->getParameter( 'file', 'xrow_sass' , $siteaccess );
+                $settings = $this->configResolver->getParameter( 'settings', 'xrow_sass' , $siteaccess );
+            }
+            catch (\Exception $e)
+            {
+                $output->writeln("<comment>No settings for siteaccess " . $siteaccess . " found, skipping</comment>");
+                if ($input->getOption('verbose')) {
+                    $output->writeln("<comment>" . $e . "</comment>");
+                }
+                continue;
+            }
             $this->compile($file, $siteaccess, $settings, $destination);
             $output->writeln("<info>Compiled " . $siteaccess . "</info>");
         }
