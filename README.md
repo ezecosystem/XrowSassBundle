@@ -1,6 +1,8 @@
 ## XrowSassBundle ##
-### Usage Example ###
-Config.yml
+### Requirements ###
+You will need to install https://github.com/sensational/sassphp
+### Usage ###
+Configure the siteaccess settings in a loaded configuration file (i.e. Config.yml)
 ```
 xrow_sass:
     siteaccess:
@@ -20,4 +22,12 @@ xrow_sass:
                 'brand-primary': "#00ff00"
                 'brand-info': "#00ff00"
                 'my-color': "red"
+```
+Run:
+``` ezpublish/console sass:compile ``` and your css files will be placed in web/css/{{siteaccessname}}.css
+
+To load them, simply create a link tag like the following:
+
+``` html
+<link rel="stylesheet" href="css/{{ ezpublish.siteaccess.name }}.css" />
 ```
