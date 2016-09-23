@@ -1,7 +1,7 @@
 ## XrowSassBundle ##
 ### Requirements ###
 You will need to install https://github.com/sensational/sassphp
-### Usage ###
+### Configuration ###
 
 Either add ```xrow/sass-bundle``` to you composer.json or run ```composer require xrow/sass-bundle```.
 ```json
@@ -37,10 +37,19 @@ xrow_sass:
                 'brand-info': "#00ff00"
                 'my-color': "red"
 ```
+You can specfiy file and settings for siteaccesses or siteaccessgroups, file specifies the SASS file to use, settings defines a list of SASS variables wich should be included.
+
+If a siteacces is in a siteaccesgroup it will gain all settings defined in the associated siteaccesgroup.
+
+Settings defined below a siteaccess will override settings defined in a siteaccessgoup.
+
+If neither the siteaccess or the associated siteaccesgroup has file attribute specified, the siteaccess will be skipped. 
+
+### Usage ###
 Run:
 ``` ezpublish/console sass:compile ``` and your CSS files will be placed in web/css/{{siteaccessname}}.css
 
-Variables defined in an siteaccess or siteaccessgroup will be either made available or override the matching variables in the defined .scss file.
+
 
 To load the CSS, simply create a link tag like the following:
 
