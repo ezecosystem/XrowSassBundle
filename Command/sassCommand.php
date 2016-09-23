@@ -44,6 +44,12 @@ class sassCommand extends ContainerAwareCommand
                 continue;
             }
 
+            if(!file_exists($file))
+            {
+                $output->writeln("<error>SASS file " . $file . " for siteaccess " . $siteaccess . " not found, skipping</error>");
+                continue;
+            }
+
             $settings = $this->configResolver->getParameter( 'settings', 'xrow_sass' , $siteaccess );
             $this->compile($file, $siteaccess, $settings, $destination);
             $output->writeln("<info>Compiled " . $siteaccess . "</info>");
