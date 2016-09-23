@@ -37,16 +37,14 @@ class sassCommand extends ContainerAwareCommand
             try
             {
                 $file = $this->configResolver->getParameter( 'file', 'xrow_sass' , $siteaccess );
-                $settings = $this->configResolver->getParameter( 'settings', 'xrow_sass' , $siteaccess );
             }
-            catch (\Exception $e)
+            catch (\eZ\Publish\Core\MVC\Exception\ParameterNotFoundException $e)
             {
-                $output->writeln("<comment>No settings for siteaccess " . $siteaccess . " found, skipping</comment>");
-                if ($input->getOption('verbose')) {
-                    $output->writeln("<comment>" . $e . "</comment>");
-                }
+                $output->writeln("<comment>No parameter 'file' found for siteaccess " . $siteaccess . ", skipping</comment>");
                 continue;
             }
+
+            $settings = $this->configResolver->getParameter( 'settings', 'xrow_sass' , $siteaccess );
             $this->compile($file, $siteaccess, $settings, $destination);
             $output->writeln("<info>Compiled " . $siteaccess . "</info>");
         }
